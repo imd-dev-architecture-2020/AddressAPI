@@ -34,7 +34,10 @@ namespace AddressDispatchService
             // it depends on it's automatically added with the correct lifecycle.
             // HttpClients are pretty complex in .NET Core.
             services.AddHttpClient<IBasisRegisterService, BasisRegisterService>(
-                (provider, client) =>
+                // since provider is not used we can discard it (i.e. replace it with an underscore)
+                // (provider, client) =>
+
+                (_, client) =>
                 {
                     // needless to say, better in config. We pass the api baseuri here.
                     client.BaseAddress = new Uri("https://api.basisregisters.vlaanderen.be");
